@@ -68,3 +68,17 @@ PUSHING TO EXISTING GITHUB REPOSITORY
     git add .
     git commit -m "your message about the changes"
     git push
+
+    Example:
+    📤 UPLOADING CHANGES TO GITHUB (After Edits)
+    bash
+    Copy
+    Edit
+    # Step 1: Stage the changes
+    git add reminders.txt
+
+    # Step 2: Commit the changes with a message
+    git commit -m "Update reminders.txt with new notes"
+
+    # Step 3: Push the changes to GitHub
+    git push
