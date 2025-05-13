@@ -1,15 +1,70 @@
-# Step 1: Navigate to your project folder
-cd C:\Users\Edriene Paingan\academic_commission  # (Windows)
-# OR
-cd /path/to/your/academic_commission  # (macOS/Linux)
+HOW TO START CODING
 
-# Step 2: Activate the virtual environment
-venv\Scripts\activate  # (Windows)
-# OR
-source venv/bin/activate  # (macOS/Linux)
+    cd C:\Users\Edriene Paingan\academic_commission
+    venv\Scripts\activate  # (Windows)
 
-# Step 3: Run the Flask app
-python app.py
+RUNNING FLASK APPLICATION
 
-# Step 4: Open your browser and go to:
-# http://127.0.0.1:5000/
+    # Step 1: Navigate to your project folder
+    cd C:\Users\Edriene Paingan\academic_commission  # (Windows)
+    # OR
+    cd /path/to/your/academic_commission  # (macOS/Linux)
+
+    # Step 2: Activate the virtual environment
+    venv\Scripts\activate  # (Windows)
+    # OR
+    source venv/bin/activate  # (macOS/Linux)
+
+    # Step 3: Run the Flask app
+    python app.py
+
+    # Step 4: Open your browser and go to:
+    # http://127.0.0.1:5000/
+
+
+PUSHING TO EXISTING GITHUB REPOSITORY
+
+    # Step 1: Navigate to your project folder
+    cd C:\Users\Edriene Paingan\academic_commission  # (Windows)
+
+    # Step 2: Initialize Git
+    git init
+
+    # Step 3: Add the GitHub repository as a remote
+    git remote add origin https://github.com/Ejaayy/AcadKo-Academic-Marketplace.git
+
+    # Step 4: Add and commit your local files
+    git add .
+    git commit -m "Initial commit for AcadKo project"
+
+    # Step 5: Create and switch to the main branch
+    git checkout -b main
+
+    # Step 6: Pull from the remote main branch to merge existing remote files (like README.md)
+    git pull origin main --allow-unrelated-histories
+
+    # Step 7: If a merge message opens, type a commit message or just save and close the editor
+
+    # Step 8: Push your local main branch to GitHub
+    git push -u origin main
+
+    IN A NUT SHELL:
+    🧠 ONLY ONCE (initial setup):
+    You only need to run these steps once:
+
+    bash
+    Copy
+    Edit
+    git init
+    git remote add origin https://github.com/Ejaayy/AcadKo-Academic-Marketplace.git
+    git checkout -b main
+    git pull origin main --allow-unrelated-histories
+    🔁 EVERY TIME YOU MAKE CHANGES and want to push them:
+    Just run these:
+
+    bash
+    Copy
+    Edit
+    git add .
+    git commit -m "your message about the changes"
+    git push
