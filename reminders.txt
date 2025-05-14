@@ -1,7 +1,15 @@
 HOW TO START CODING
 
+    # Step 1: Navigate to your project folder
     cd C:\Users\Edriene Paingan\academic_commission
+        → This moves you into your project directory.
+
+    # Step 2: Activate the virtual environment
     venv\Scripts\activate  # (Windows)
+        → This makes sure Python uses your project’s specific environment 
+          (with Flask installed).
+
+
 
 RUNNING FLASK APPLICATION
 
@@ -14,12 +22,16 @@ RUNNING FLASK APPLICATION
     venv\Scripts\activate  # (Windows)
     # OR
     source venv/bin/activate  # (macOS/Linux)
+        → Activates your Python environment (venv).
 
     # Step 3: Run the Flask app
     python app.py
+        → Starts the Flask development server.
 
     # Step 4: Open your browser and go to:
-    # http://127.0.0.1:5000/
+    http://127.0.0.1:5000/
+        → Opens your running web app locally.
+
 
 
 PUSHING TO EXISTING GITHUB REPOSITORY
@@ -29,51 +41,50 @@ PUSHING TO EXISTING GITHUB REPOSITORY
 
     # Step 2: Initialize Git
     git init
+        → Makes this folder a Git repo (only once).
 
     # Step 3: Add the GitHub repository as a remote
     git remote add origin https://github.com/Ejaayy/AcadKo-Academic-Marketplace.git
+        → Links your local repo to the GitHub repo.
 
     # Step 4: Add and commit your local files
     git add .
     git commit -m "Initial commit for AcadKo project"
+        → Saves your changes to Git (locally).
 
     # Step 5: Create and switch to the main branch
     git checkout -b main
+        → Creates the 'main' branch (if not already created).
 
     # Step 6: Pull from the remote main branch to merge existing remote files (like README.md)
     git pull origin main --allow-unrelated-histories
+        → Merges the GitHub version (if it has README or LICENSE).
 
     # Step 7: If a merge message opens, type a commit message or just save and close the editor
+        → Just save it (press Ctrl+S and close or type `:wq` in Vim if you're stuck).
 
     # Step 8: Push your local main branch to GitHub
     git push -u origin main
+        → Uploads your full local project to GitHub.
 
-    IN A NUT SHELL:
-    🧠 ONLY ONCE (initial setup):
-    You only need to run these steps once:
 
-    bash
-    Copy
-    Edit
+IN A NUTSHELL:
+
+🧠 ONLY ONCE (initial setup):
+
     git init
     git remote add origin https://github.com/Ejaayy/AcadKo-Academic-Marketplace.git
     git checkout -b main
     git pull origin main --allow-unrelated-histories
-    🔁 EVERY TIME YOU MAKE CHANGES and want to push them:
-    Just run these:
 
-    bash
-    Copy
-    Edit
+🔁 EVERY TIME YOU MAKE CHANGES and want to push them:
+
     git add .
     git commit -m "your message about the changes"
     git push
 
-    Example:
-    📤 UPLOADING CHANGES TO GITHUB (After Edits)
-    bash
-    Copy
-    Edit
+📤 UPLOADING CHANGES TO GITHUB (Example):
+
     # Step 1: Stage the changes
     git add reminders.txt
 
@@ -82,3 +93,48 @@ PUSHING TO EXISTING GITHUB REPOSITORY
 
     # Step 3: Push the changes to GitHub
     git push
+
+
+
+HOW TO SETUP FILES IN FLASK
+
+🛠️ REQUIRED FILE STRUCTURE:
+This is a **minimal basic layout** for a Flask app:
+
+    academic_commission/
+    ├── app.py                  # Main Python file that runs the app
+    ├── templates/             # HTML files go here
+    │   ├── index.html
+    │   ├── login.html
+    │   └── register.html
+    └── venv/                  # Your virtual environment (created separately)
+
+✅ SETTING THIS UP YOURSELF FROM SCRATCH:
+
+1. **Create the folder**:
+    mkdir academic_commission
+    cd academic_commission
+
+2. **Create a virtual environment**:
+    python -m venv venv
+
+3. **Activate it**:
+    venv\Scripts\activate  # (Windows)
+
+4. **Install Flask**:
+    pip install flask
+
+5. **Create your app file**:
+    Create a file named `app.py` and paste this inside:
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
