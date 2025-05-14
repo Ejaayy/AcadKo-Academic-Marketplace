@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}Contact Us - AcadKo{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto p-8">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold mb-4 text-blue-700">📞 Contact Us</h1>
+    <p class="text-lg text-gray-600 mb-8">
+      Have questions or need support? We're here to help!
+    </p>
+
+    <!-- Contact Form -->
+    <form class="max-w-2xl mx-auto space-y-4">
+      
+      <!-- Full Name Field -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+        <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+
+      <!-- Email Address Field -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+        <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+
+      <!-- Message Field -->
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700">Your Message</label>
+        <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700">Send Message</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
