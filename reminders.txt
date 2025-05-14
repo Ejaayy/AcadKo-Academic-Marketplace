@@ -80,8 +80,8 @@ IN A NUTSHELL:
 🔁 EVERY TIME YOU MAKE CHANGES and want to push them:
 
     git add .
-    git commit -m "your message about the changes"
-    git push
+    git commit -m "your message about the changes"    -> Saves your changes locally (in your Git repo)
+    git push                                          -> Sends your local commits to GitHub (the cloud)
 
     //If you accidentally open VIM, just use :wq to exit
 
