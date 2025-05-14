@@ -83,6 +83,8 @@ IN A NUTSHELL:
     git commit -m "your message about the changes"
     git push
 
+    //If you accidentally open VIM, just use :wq to exit
+
 📤 UPLOADING CHANGES TO GITHUB (Example):
 
     # Step 1: Stage the changes
