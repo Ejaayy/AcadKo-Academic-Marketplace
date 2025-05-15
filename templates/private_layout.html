@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AcadKo - {% block title %}{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body class="bg-gray-50">
+  <div class="flex h-screen">
+
+    <!-- Sidebar -->
+    <aside class="min-w-[260px] md:w-72 bg-white border-r border-gray-200 flex flex-col">
+      <!-- Logo -->
+      <div class="p-5">
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
+          <span class="text-xl font-bold text-gray-900">AcadKo</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 px-4 space-y-1 text-[15px] font-semibold">
+        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
+          <i class="fas fa-home w-6 text-center"></i><span>Home</span>
+        </a>
+        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
+          <i class="fas fa-search w-6 text-center"></i><span>Explore</span>
+        </a>
+        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
+          <i class="fas fa-bell w-6 text-center"></i><span>Notifications</span>
+        </a>
+        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
+          <i class="fas fa-envelope w-6 text-center"></i><span>Messages</span>
+        </a>
+        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
+          <i class="fas fa-bookmark w-6 text-center"></i><span>Bookmarks</span>
+        </a>
+        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
+          <i class="fas fa-list w-6 text-center"></i><span>Lists</span>
+        </a>
+        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
+          <i class="fas fa-user w-6 text-center"></i><span>Profile</span>
+        </a>
+        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
+          <i class="fas fa-ellipsis-h w-6 text-center"></i><span>More</span>
+        </a>
+
+        <!-- Action Button -->
+        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-full transition">
+          New Post
+        </button>
+      </nav>
+
+      <!-- Profile Section -->
+      <div class="p-4 mt-auto mb-3">
+        <div class="flex items-center justify-between p-2 rounded-full hover:bg-gray-100 cursor-pointer">
+          <div class="flex items-center space-x-3">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+            <div>
+              <p class="text-sm font-semibold truncate">John Student</p>
+              <p class="text-xs text-gray-500 truncate">@johnstudent</p>
+            </div>
+          </div>
+          <i class="fas fa-ellipsis-h text-gray-500"></i>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Header with search -->
+      <header class="bg-white border-b border-gray-200 flex items-center justify-between px-6 py-4">
+        <h1 class="text-xl font-bold text-gray-900">{% block h1 %}{% endblock %}</h1>
+        <!-- Search Bar -->
+        <div class="relative w-64">
+          <input type="text" placeholder="Search AcadKo"
+            class="w-full bg-gray-100 rounded-full py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+          <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="flex-1 overflow-y-auto p-6">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+
+  </div>
+</body>
+</html>
