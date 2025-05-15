@@ -10,6 +10,14 @@ def home():
 def register():
     return render_template("register.html")
 
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+@app.route("/aboutus")
+def aboutus():
+    return render_template("aboutus.html")
+
 @app.route("/login")
 def login():
     return render_template("login.html")

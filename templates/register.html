@@ -1,20 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register - AcadKo</title>
-</head>
-<body>
-    <h1>Register</h1>
-    <form action="/register" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br><br>
+{% extends "layout.html" %}
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br><br>
+{% block title %}Register - AcadKo{% endblock %}
 
-        <button type="submit">Register</button>
+{% block content %}
+<div class="max-w-4xl mx-auto p-8">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold mb-4 text-blue-700">Join us!</h1>
+    <p class="text-lg text-gray-600 mb-8">
+      Register an account now and join millions of users!
+    </p>
+
+    <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
+    <h1 class="font-medium text-gray-700 text-2xl mb-4">Register</h1>
+    
+    <form action="/register" method="POST" class="space-y-4">
+        <div class="flex items-center space-x-4">
+        <label for="username" class="font-medium text-gray-700 w-24">Username:</label>
+        <input type="text" name="username" required class="flex-1 border border-gray-300 rounded px-3 py-2 shadow-sm" />
+        </div>
+
+        <div class="flex items-center space-x-4">
+        <label for="password" class="font-medium text-gray-700 w-24">Password:</label>
+        <input type="password" name="password" required class="flex-1 border border-gray-300 rounded px-3 py-2  shadow-sm" />
+        </div>
+
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-lg font-base w-full  shadow-sm">
+        Register
+        </button>
     </form>
-    <a href="/login">Already have an account? Login here.</a>
-</body>
-</html>
+
+    <p class="mt-4 text-center text-sm text-gray-600">
+        <a href="/login" class="text-blue-600 hover:underline">Already have an account? Login here.</a>
+    </p>
+    </div>
+
+</div>
+{% endblock %}
+
