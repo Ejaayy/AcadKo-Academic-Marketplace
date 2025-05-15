@@ -1,0 +1,182 @@
+-- Users table: stores user information and status
+CREATE TABLE Users (
+    id SERIAL PRIMARY KEY,                      -- Unique user ID
+    name VARCHAR(100) NOT NULL,                 -- User's full name
+    email VARCHAR(255) UNIQUE NOT NULL,         -- User's email address (unique)
+    username VARCHAR(50) UNIQUE NOT NULL,       -- Username (unique)
+    password_hash VARCHAR(255) NOT NULL,        -- Hashed password
+    profile_picture VARCHAR(255),                -- URL or path to profile picture
+    bio TEXT,                                   -- User biography or description
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Account creation timestamp
+    last_login TIMESTAMP,                        -- Last login timestamp
+    role VARCHAR(20) CHECK (role IN ('student', 'teacher', 'admin')) DEFAULT 'student',  -- User role
+    status VARCHAR(20) CHECK (status IN ('active', 'banned')) DEFAULT 'active'           -- Account status
+);
+
+-- Posts table: stores user-generated posts such as notes, questions, resources
+CREATE TABLE Posts (
+    id SERIAL PRIMARY KEY,                       -- Unique post ID
+    user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- Author user ID
+    title VARCHAR(255),                          -- Post title
+    content TEXT NOT NULL,                       -- Main content of the post
+    type VARCHAR(20) CHECK (type IN ('note', 'question', 'resource')),  -- Type of post
+    visibility VARCHAR(10) CHECK (visibility IN ('public', 'private')) DEFAULT 'public',  -- Visibility status
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- When post was created
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP   -- When post was last updated
+);
+
+-- Comments table: stores comments made on posts
+CREATE TABLE Comments (
+    id SERIAL PRIMARY KEY,                       -- Unique comment ID
+    post_id INTEGER NOT NULL REFERENCES Posts(id) ON DELETE CASCADE,  -- Associated post ID
+    user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- Comment author user ID
+    comment_text TEXT NOT NULL,                  -- Comment content
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Comment creation timestamp
+);
+
+-- Followers table: stores follower-followed relationships between users
+CREATE TABLE Followers (
+    follower_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- User who follows
+    followed_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- User being followed
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp of follow action
+    PRIMARY KEY (follower_id, followed_id)           -- Composite primary key to prevent duplicates
+);
+
+-- Notifications table: stores notifications for users
+CREATE TABLE Notifications (
+    id SERIAL PRIMARY KEY,                       -- Unique notification ID
+    user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- Recipient user ID
+    type VARCHAR(50) NOT NULL,                   -- Type of notification (e.g., 'like', 'comment')
+    source_id INTEGER,                           -- Related post/comment/message ID (nullable)
+    is_read BOOLEAN DEFAULT FALSE,               -- Has the notification been read?
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Notification creation timestamp
+);
+
+-- Messages table: stores private direct messages between users
+CREATE TABLE Messages (
+    id SERIAL PRIMARY KEY,                       -- Unique message ID
+    sender_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- Sender user ID
+    receiver_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- Receiver user ID
+    message_text TEXT NOT NULL,                   -- Message content
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Message sent timestamp
+    is_read BOOLEAN DEFAULT FALSE                  -- Has the message been read?
+);
+
+-- Bookmarks table: stores posts bookmarked/saved by users
+CREATE TABLE Bookmarks (
+    user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- User who bookmarked
+    post_id INTEGER NOT NULL REFERENCES Posts(id) ON DELETE CASCADE,  -- Post bookmarked
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp when bookmarked
+    PRIMARY KEY (user_id, post_id)                   -- Composite primary key to prevent duplicates
+);
+
+-- Collections table: stores user-created lists or collections of posts/resources
+CREATE TABLE Collections (
+    id SERIAL PRIMARY KEY,                       -- Unique collection ID
+    user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,  -- Owner user ID
+    name VARCHAR(255) NOT NULL,                   -- Collection name
+    description TEXT,                             -- Collection description
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- When collection was created
+);
+
+-- Tags table: stores tags or categories for posts/resources
+CREATE TABLE Tags (
+    id SERIAL PRIMARY KEY,                       -- Unique tag ID
+    name VARCHAR(50) UNIQUE NOT NULL             -- Tag name (unique)
+);
+
+-- PostTags table: join table for many-to-many relation between posts and tags
+CREATE TABLE PostTags (
+    post_id INTEGER NOT NULL REFERENCES Posts(id) ON DELETE CASCADE,  -- Associated post ID
+    tag_id INTEGER NOT NULL REFERENCES Tags(id) ON DELETE CASCADE,    -- Associated tag ID
+    PRIMARY KEY (post_id, tag_id)                   -- Composite primary key
+);
+
+-- UserSettings table: stores user preferences and customization settings
+CREATE TABLE UserSettings (
+    user_id INTEGER PRIMARY KEY REFERENCES Users(id) ON DELETE CASCADE,  -- User ID (one-to-one)
+    email_notifications BOOLEAN DEFAULT TRUE,     -- Preference for email notifications
+    privacy_level VARCHAR(20) DEFAULT 'public'    -- Privacy setting (e.g., public/private)
+    -- Add more preference columns as needed
+);
+
+-- SQLite3 Quick Cheat Sheet --
+
+-- Open database:
+-- sqlite3 your_database.db
+
+-- Show tables:
+.tables
+
+-- Show table schema:
+.schema table_name
+
+-- Exit SQLite:
+.exit
+
+-- Create a table:
+CREATE TABLE table_name (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    column1 TEXT,
+    column2 INTEGER
+);
+
+-- Add a new column to existing table:
+ALTER TABLE table_name ADD COLUMN new_column TEXT;
+
+-- Drop a table:
+DROP TABLE table_name;
+
+-- Insert a row:
+INSERT INTO table_name (column1, column2) VALUES ('value1', 123);
+
+-- Update rows:
+UPDATE table_name SET column1 = 'new_value' WHERE id = 1;
+
+-- Delete rows:
+DELETE FROM table_name WHERE id = 1;
+
+-- Select data:
+SELECT * FROM table_name;
+SELECT column1, column2 FROM table_name WHERE column2 > 100;
+
+-- Filtering and sorting:
+SELECT * FROM table_name WHERE column1 = 'some_value';
+SELECT * FROM table_name WHERE column1 LIKE 'prefix%';
+SELECT * FROM table_name ORDER BY column2 DESC;
+SELECT * FROM table_name LIMIT 10;
+
+-- Joins:
+
+-- INNER JOIN: matching rows in both tables
+SELECT a.id, a.column1, b.column2
+FROM table_a a
+INNER JOIN table_b b ON a.id = b.a_id;
+
+-- LEFT JOIN: all rows from left table + matching from right
+SELECT a.id, a.column1, b.column2
+FROM table_a a
+LEFT JOIN table_b b ON a.id = b.a_id;
+
+-- Note: SQLite has no RIGHT JOIN, use LEFT JOIN by switching tables.
+
+-- Indexes:
+CREATE INDEX idx_column1 ON table_name(column1);
+DROP INDEX idx_column1;
+
+-- Transactions:
+BEGIN TRANSACTION;
+-- multiple queries here
+COMMIT;
+-- or ROLLBACK;
+
+-- Useful functions:
+SELECT CURRENT_TIMESTAMP;
+SELECT COUNT(*), AVG(column2), MAX(column2), MIN(column2) FROM table_name;
+
+-- Important SQLite notes:
+-- You can only ADD columns with ALTER TABLE (no remove/rename).
+-- Enable foreign keys:
+PRAGMA foreign_keys = ON;
+
+-- SQLite is dynamically typed, but use types for clarity.
