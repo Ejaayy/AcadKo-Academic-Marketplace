@@ -1,18 +1,145 @@
-
 {% extends "layout.html" %}
 
-{% block title %}Login - AcadKo{% endblock %}
+{% block title %}Welcome to AcadKo{% endblock %}
 
 {% block content %}
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br><br>
+<div class="max-w-4xl mx-auto p-8">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold mb-4 text-blue-700">🎓 Welcome to AcadKo</h1>
+    <p class="text-lg text-gray-600">
+      A student-powered academic marketplace — built by students, for students.
+    </p>
+    <div class="mt-6">
+      <a href="/register" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700">Join Now</a>
+      <button onclick="openModal()" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700">Login</button>
+    </div>
+  </div>
+</div>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br><br>
+<div id="gallery" class="relative w-full max-w-6xl mx-auto" data-carousel="multi-slide">
+    <!-- Carousel wrapper -->
+    <div class="relative h-64 md:h-96 overflow-hidden rounded-xl bg-gray-100">
+        <!-- Slides container -->
+        <div class="flex transition-transform duration-500 ease-in-out" data-carousel-inner>
+            <!-- Slide 1 (group of 3 images) -->
+            <div class="w-full flex-shrink-0 grid grid-cols-3 gap-4 p-4" data-carousel-item>
+                <div class="relative h-full overflow-hidden rounded-lg">
+                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300" 
+                         alt="Gallery image 1">
+                </div>
+                <div class="relative h-full overflow-hidden rounded-lg">
+                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300" 
+                         alt="Gallery image 2">
+                </div>
+                <div class="relative h-full overflow-hidden rounded-lg">
+                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300" 
+                         alt="Gallery image 3">
+                </div>
+            </div>
+            
+            <!-- Slide 2 (group of 3 images) -->
+            <div class="w-full flex-shrink-0 grid grid-cols-3 gap-4 p-4" data-carousel-item>
+                <div class="relative h-full overflow-hidden rounded-lg">
+                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300" 
+                         alt="Gallery image 4">
+                </div>
+                <div class="relative h-full overflow-hidden rounded-lg">
+                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300" 
+                         alt="Gallery image 5">
+                </div>
+                <div class="relative h-full overflow-hidden rounded-lg">
+                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300" 
+                         alt="Gallery image 6">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slider controls -->
+    <button type="button" 
+            class="absolute top-1/2 -left-4 z-30 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg transform -translate-y-1/2 hover:bg-gray-100 focus:outline-none" 
+            data-carousel-prev>
+        <svg class="w-5 h-5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+        </svg>
+        <span class="sr-only">Previous</span>
+    </button>
+    <button type="button" 
+            class="absolute top-1/2 -right-4 z-30 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg transform -translate-y-1/2 hover:bg-gray-100 focus:outline-none" 
+            data-carousel-next>
+        <svg class="w-5 h-5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+        </svg>
+        <span class="sr-only">Next</span>
+    </button>
+    
+    <!-- Indicators -->
+    <div class="flex justify-center mt-4 space-x-2" data-carousel-indicators>
+        <button type="button" 
+                class="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition" 
+                aria-current="true" 
+                data-carousel-indicator="0"></button>
+        <button type="button" 
+                class="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition" 
+                data-carousel-indicator="1"></button>
+    </div>
+</div>
 
-        <button type="submit">Login</button>
-    </form>
-    <a href="/register">Don't have an account? Register here.</a>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('[data-carousel="multi-slide"]');
+    const inner = carousel.querySelector('[data-carousel-inner]');
+    const items = carousel.querySelectorAll('[data-carousel-item]');
+    const prevBtn = carousel.querySelector('[data-carousel-prev]');
+    const nextBtn = carousel.querySelector('[data-carousel-next]');
+    const indicators = carousel.querySelectorAll('[data-carousel-indicator]');
+    
+    let currentIndex = 0;
+    const itemCount = items.length;
+    
+    function updateCarousel() {
+        inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            if (index === currentIndex) {
+                indicator.classList.add('bg-blue-600');
+                indicator.classList.remove('bg-gray-300');
+            } else {
+                indicator.classList.remove('bg-blue-600');
+                indicator.classList.add('bg-gray-300');
+            }
+        });
+    }
+    
+    // Button events
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % itemCount;
+        updateCarousel();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+        updateCarousel();
+    });
+    
+    // Indicator events
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentIndex = index;
+            updateCarousel();
+        });
+    });
+    
+    // Initialize
+    updateCarousel();
+});
+</script>
+
 {% endblock %}

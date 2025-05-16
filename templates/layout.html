@@ -50,17 +50,12 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex md:items-center md:space-x-5">
-                    {% if session["user_id"] %}
-                        <a href="/dashboard" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Dashboard</a>
-                        <a href="/logout" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Log Out</a>
-                    {% else %}
-                        <a href="/dashboard" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Prototype</a>
-                        <a href="/" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-lg font-base">Home</a>
-                        <a href="/aboutus" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-lg font-base">About Us</a>
-                        <a href="/contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-lg font-base">Contact</a>
-                        <a href="/register" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-lg font-base">Register</a>
-                        <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-lg font-base">Log In</button>
-                    {% endif %}
+                    <a href="/dashboard" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Prototype</a>
+                    <a href="/" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-lg font-base">Home</a>
+                    <a href="/aboutus" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-lg font-base">About Us</a>
+                    <a href="/contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-lg font-base">Contact</a>
+                    <a href="/register" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-lg font-base">Register</a>
+                    <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-lg font-base">Log In</button>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -121,8 +116,9 @@
             </div>
             
             <!-- Modal body -->
+            <form action="/login" method="POST">
             <div class="p-6">
-                <form class="space-y-4">
+                
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Your email</label>
                         <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@acadko.com" required />
@@ -140,7 +136,7 @@
                         </div>
                         <a href="#" class="text-sm text-blue-600 hover:underline">Lost Password?</a>
                     </div>
-                </form>
+                
             </div>
             
             <!-- Modal footer -->
@@ -159,6 +155,7 @@
                 </span>
             </div>
         </div>
+        </form>
     </div>
 </div>
     
