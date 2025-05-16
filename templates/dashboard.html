@@ -1,8 +1,88 @@
 {% extends "private_layout.html" %}
 
-{% block h1 %}HELLO YOU BITCH WELCOME BACK SUCK MY-{% endblock %}
-
+{% block h1 %}Welcome Back to AcadKo!{% endblock %}
 {% block content %}
 
-{% endblock %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <!-- Tutor Card Example -->
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-5">
+            <div class="flex items-center mb-4">
+                <img class="w-12 h-12 rounded-full mr-3" src="/images/profiles/tutor1.jpg" alt="Tutor profile" />
+                <div>
+                    <h5 class="text-xl font-bold text-gray-900 dark:text-white">Maria Santos</h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Essay Writing Specialist</span>
+                </div>
+            </div>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                MA in English Literature with 5+ years experience. Can help with essays, research papers, and thesis editing.
+            </p>
+            <div class="mb-4">
+                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Essay Writing</span>
+                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Research Papers</span>
+                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Thesis Help</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-gray-900 dark:text-white">₱500/hr</span>
+                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Hire
+                </a>
+            </div>
+        </div>
+    </div>
 
+    <!-- Reviewer Seller Card Example -->
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-5">
+            <div class="flex items-center mb-4">
+                <img class="w-12 h-12 rounded-full mr-3" src="/images/profiles/tutor2.jpg" alt="Tutor profile" />
+                <div>
+                    <h5 class="text-xl font-bold text-gray-900 dark:text-white">Juan Dela Cruz</h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Licensure Exam Expert</span>
+                </div>
+            </div>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                Engineering board topnotcher selling comprehensive reviewers for Civil Engineering students.
+            </p>
+            <div class="mb-4">
+                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Engineering</span>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Board Exams</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-gray-900 dark:text-white">₱1,200/reviewer</span>
+                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Buy Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Academic Writer Card Example -->
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-5">
+            <div class="flex items-center mb-4">
+                <img class="w-12 h-12 rounded-full mr-3" src="/images/profiles/tutor3.jpg" alt="Tutor profile" />
+                <div>
+                    <h5 class="text-xl font-bold text-gray-900 dark:text-white">Dr. Andrea Reyes</h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">PhD in Psychology</span>
+                </div>
+            </div>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                Academic writer specializing in psychology and social sciences papers. Can help with journal articles and thesis chapters.
+            </p>
+            <div class="mb-4">
+                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Psychology</span>
+                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Research</span>
+                <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Thesis</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-gray-900 dark:text-white">₱2,000/page</span>
+                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Commission
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
