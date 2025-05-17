@@ -55,19 +55,27 @@ def register():
 
 @app.route("/dashboard")
 def dashboard():
-    user_id = session.get("user_id")
-    #if not user_id:
-     #   return redirect(url_for("login"))
+    if "user_id" not in session:
+        return redirect(url_for("login"))
 
-    conn = get_db_connection()   # Get DB connection
-    cursor = conn.cursor()       # Get cursor
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
-    row = cursor.fetchone()
+    # Get user info
+    cursor.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
+    user = cursor.fetchone()
 
-    conn.close()                 # Close connection
+    # Get posts with username joined
+    cursor.execute("""
+        SELECT Posts.*, users.username
+        FROM Posts
+        JOIN users ON Posts.user_id = users.id
+        ORDER BY Posts.created_at DESC
+    """)
+    posts = cursor.fetchall()
 
-    return render_template("dashboard.html", user=row)
+    conn.close()
+    return render_template("dashboard.html", user=user, posts=posts)
 
 @app.route("/logout")
 def logout():
@@ -144,7 +152,8 @@ def private_profile():
         # Redirect back to profile page, with edit mode still ON (edit='true' in URL)
         return redirect(url_for('private_profile', edit='true'))
 
-    # If GET request, fetch the user info to display
+    # If GET request, fetch the user info to display,
+    #Will go to t
     cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
     user = cursor.fetchone()
     conn.close()
@@ -156,6 +165,63 @@ def private_profile():
     # Render the profile page with user data and edit flag
     return render_template("private_profile_layout.html", user=user, edit=edit)
 
+@app.route('/add_service', methods=['GET', 'POST'])
+def add_service():
+    if "user_id" not in session:
+        return redirect("/login")
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
+    user = cursor.fetchone()
+
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        category = request.form['category']
+        price = request.form['price']
+        user_id = session['user_id']
+
+        # Insert into Posts instead of gigs
+        cursor.execute(
+            '''
+            INSERT INTO Posts (user_id, service_title, description, category, price)
+            VALUES (?, ?, ?, ?, ?)
+            ''',
+            (user_id, title, description, category, price)
+        )
+        conn.commit()
+        conn.close()
+        return redirect('/dashboard')
+
+    conn.close()
+    return render_template('add_service.html', user=user)
+
+
+@app.route('/profile/<int:user_id>')
+def profile(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Fetch user by the profile ID
+    cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+    user = cursor.fetchone()
+    if not user:
+        cursor.close()
+        conn.close()
+        return "User not found", 404
+
+    # Get currently logged-in user ID from session
+    current_user_id = session.get('user_id')
+
+    # Determine if current user owns this profile
+    is_owner = (current_user_id is not None and current_user_id == user['id'])
+
+    cursor.close()
+    conn.close()
+
+    return render_template('public_profile_layout.html', user=user, edit=False, is_owner=is_owner)
 
 if __name__ == "__main__":
     app.run(debug=True)

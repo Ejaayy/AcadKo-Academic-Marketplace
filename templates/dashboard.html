@@ -1,88 +1,58 @@
 {% extends "private_layout.html" %}
 
 {% block h1 %}Welcome Back to AcadKo!{% endblock %}
+
 {% block content %}
-
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-    <!-- Tutor Card Example -->
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-        <div class="p-5">
-            <div class="flex items-center mb-4">
-                <img class="w-12 h-12 rounded-full mr-3" src="/images/profiles/tutor1.jpg" alt="Tutor profile" />
-                <div>
-                    <h5 class="text-xl font-bold text-gray-900 dark:text-white">Maria Santos</h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400">Essay Writing Specialist</span>
+<div class="w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4">
+        {% for post in posts %}
+        <div class="bg-white rounded-lg hover:shadow-md transition-all duration-200 border border-gray-200 p-6 w-full max-w-none">
+            <div>
+                <!-- User Profile Section -->
+                <div class="flex items-start gap-3 mb-4">
+                    <div class="relative shrink-0">
+                        <img class="w-12 h-12 rounded-full object-cover border-2 border-blue-50" 
+                             src="/images/profiles/default.jpg" alt="User profile" />
+                        <div class="absolute -bottom-1 -right-1 bg-blue-100 rounded-full p-1">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="min-w-0">
+                        <h3 class="text-lg font-semibold text-gray-800">{{ post.service_title }}</h3>
+                        <p class="text-sm text-gray-500">
+                            @{% if post.username %}{{ post.username }}{% else %}User{% endif %}
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Category Tag -->
+                <span class="inline-block mb-3 px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-600">
+                    {{ post.category }}
+                </span>
+                
+                <!-- Description -->
+                <div class="mb-5">
+                    <p class="text-gray-700 whitespace-normal break-words leading-relaxed">
+                        {{ post.description }}
+                    </p>
+                </div>
+                
+                <!-- Price and CTA -->
+                <div class="flex items-center justify-between border-t border-gray-100 pt-3">
+                    <div>
+                        <span class="text-xs text-gray-500">Starting at</span>
+                        <p class="text-2xl font-bold text-blue-600">₱{{ post.price }}</p>
+                    </div>
+                    <a href="{{ url_for('profile', user_id=post.user_id) }}" class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
+                        Hire Now
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
                 </div>
             </div>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                MA in English Literature with 5+ years experience. Can help with essays, research papers, and thesis editing.
-            </p>
-            <div class="mb-4">
-                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Essay Writing</span>
-                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Research Papers</span>
-                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Thesis Help</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-gray-900 dark:text-white">₱500/hr</span>
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Hire
-                </a>
-            </div>
         </div>
-    </div>
-
-    <!-- Reviewer Seller Card Example -->
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-        <div class="p-5">
-            <div class="flex items-center mb-4">
-                <img class="w-12 h-12 rounded-full mr-3" src="/images/profiles/tutor2.jpg" alt="Tutor profile" />
-                <div>
-                    <h5 class="text-xl font-bold text-gray-900 dark:text-white">Juan Dela Cruz</h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400">Licensure Exam Expert</span>
-                </div>
-            </div>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                Engineering board topnotcher selling comprehensive reviewers for Civil Engineering students.
-            </p>
-            <div class="mb-4">
-                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Engineering</span>
-                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Board Exams</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-gray-900 dark:text-white">₱1,200/reviewer</span>
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Buy Now
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Academic Writer Card Example -->
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-        <div class="p-5">
-            <div class="flex items-center mb-4">
-                <img class="w-12 h-12 rounded-full mr-3" src="/images/profiles/tutor3.jpg" alt="Tutor profile" />
-                <div>
-                    <h5 class="text-xl font-bold text-gray-900 dark:text-white">Dr. Andrea Reyes</h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400">PhD in Psychology</span>
-                </div>
-            </div>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                Academic writer specializing in psychology and social sciences papers. Can help with journal articles and thesis chapters.
-            </p>
-            <div class="mb-4">
-                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Psychology</span>
-                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Research</span>
-                <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Thesis</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="text-lg font-bold text-gray-900 dark:text-white">₱2,000/page</span>
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Commission
-                </a>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
-
 {% endblock %}
