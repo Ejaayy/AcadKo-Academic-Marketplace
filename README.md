@@ -1,5 +1,5 @@
 # AcadKo  
-#### Video Demo:  <URL HERE>  
+#### Video Demo: https://www.youtube.com/watch?v=nEe7Cl9L1bc
 #### Description:  
 AcadKo is a student-powered academic marketplace built by students, for students. It provides a safe platform for students in the Philippines—especially those under 18 who are often excluded from formal work—to offer and request academic services. These services include essay writing, tutoring, presentation creation, problem-solving, and more. AcadKo empowers young learners to monetize their academic skills, connect with peers, and gain valuable experience in a supportive community.
 
