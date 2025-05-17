@@ -3,6 +3,7 @@ import helpers
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+from flask_login import login_required
 
 app = Flask(__name__)
 app.secret_key = "my_super_secret_key_123456"
@@ -54,7 +55,24 @@ def register():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    user_id = session.get("user_id")
+    #if not user_id:
+     #   return redirect(url_for("login"))
+
+    conn = get_db_connection()   # Get DB connection
+    cursor = conn.cursor()       # Get cursor
+
+    cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+    row = cursor.fetchone()
+
+    conn.close()                 # Close connection
+
+    return render_template("dashboard.html", user=row)
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
 
 @app.route("/contact")
 def contact():
@@ -95,6 +113,48 @@ def login():
     
     else:
         return render_template("login.html")
+
+@app.route('/private_profile', methods=['GET', 'POST'])
+def private_profile():
+    # Get the user_id from the session (logged-in user)
+    user_id = session.get('user_id')
+    if not user_id:
+        # If no user_id found, redirect to login page
+        return redirect(url_for('login'))
+
+    # Connect to the database
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if request.method == 'POST':
+        # Handle form submission for editing profile fields
+        field = request.form.get('field')  # which field user wants to update
+        value = request.form.get('value')  # new value entered by the user
+
+        # Only allow updating these specific fields for safety
+        allowed_fields = {'email', 'linkedin', 'description', 'experience', 'certifications', 'skills'}
+
+        if field in allowed_fields:
+            # Update the corresponding field in the database for this user
+            cursor.execute(f"UPDATE users SET {field} = ? WHERE id = ?", (value, user_id))
+            conn.commit()
+
+        conn.close()
+
+        # Redirect back to profile page, with edit mode still ON (edit='true' in URL)
+        return redirect(url_for('private_profile', edit='true'))
+
+    # If GET request, fetch the user info to display
+    cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+    user = cursor.fetchone()
+    conn.close()
+
+    # Check if the URL query parameter 'edit' is 'true', so we know
+    # whether to show editable forms or just view mode.
+    edit = request.args.get('edit') == 'true'
+
+    # Render the profile page with user data and edit flag
+    return render_template("private_profile_layout.html", user=user, edit=edit)
 
 
 if __name__ == "__main__":

@@ -13,6 +13,8 @@ CREATE TABLE Users (
     status VARCHAR(20) CHECK (status IN ('active', 'banned')) DEFAULT 'active'           -- Account status
 );
 
+//TO BE ADDED
+
 -- Posts table: stores user-generated posts such as notes, questions, resources
 CREATE TABLE Posts (
     id SERIAL PRIMARY KEY,                       -- Unique post ID

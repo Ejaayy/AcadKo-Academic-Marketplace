@@ -19,7 +19,7 @@ It’s designed especially for students in the Philippines who are under 18 and 
 
 ## ⚙️ Tech Stack
 
-- **Python 3 + Flask** – backend web framework
+- **Python + Flask** – backend web framework
 - **HTML, CSS, Bootstrap** – frontend layout & styling
 - **SQLite** – lightweight local database
 - **Flask Sessions** – to track login status and users
@@ -32,10 +32,10 @@ It’s designed especially for students in the Philippines who are under 18 and 
 - 🔐 User Registration & Login (with session tracking)
 - 📝 Post Gigs (offer a service)
 - 🔍 Browse & Request Gigs
-- 💬 Messaging or delivery system (optional expansion)
-- 💰 In-platform Coin System (mock economy)
-- 📄 Order Tracking & Delivery Files
-- ✅ Admin approval tools (optional)
+- 💬 Messaging or delivery system (FOR FUTURE UPDATE)
+- 💰 In-platform Coin System (FOR FUTURE UPDATE)
+- 📄 Order Tracking & Delivery Files (FOR FUTURE UPDATE)
+- ✅ Admin approval tools (FOR FUTURE UPDATE)
 
 ---
 

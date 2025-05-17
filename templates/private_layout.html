@@ -5,10 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AcadKo - {% block title %}{% endblock %}</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#3b82f6',
+              600: '#2563eb',
+            },
+            accent: {
+              500: '#8b5cf6',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .nav-item.active {
+      @apply bg-primary-100 text-primary-600;
+    }
+    .nav-item.active i {
+      @apply text-primary-600;
+    }
+    .coming-soon {
+      @apply after:content-['(Soon)'] after:ml-2 after:text-xs after:text-gray-400;
+    }
+  </style>
 </head>
 <body class="bg-gray-50">
   <div class="flex h-screen">
@@ -16,81 +47,128 @@
     <!-- Sidebar -->
     <aside class="min-w-[260px] md:w-72 bg-white border-r border-gray-200 flex flex-col">
       <!-- Logo -->
-      <div class="p-5">
+      <div class="p-5 pb-3">
         <div class="flex items-center space-x-3">
-          <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
-          <span class="text-xl font-bold text-gray-900">AcadKo</span>
+          <div class="p-2 bg-primary-500 rounded-lg">
+            <i class="fas fa-graduation-cap text-white text-xl"></i>
+          </div>
+          <div>
+            <span class="text-xl font-bold text-gray-900">AcadKo</span>
+            <p class="text-xs text-gray-500">Student Academic Marketplace</p>
+          </div>
         </div>
       </div>
 
       <!-- Navigation -->
-      <nav class="flex-1 px-4 space-y-1 text-[15px] font-semibold">
-        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
-          <i class="fas fa-home w-6 text-center"></i><span>Home</span>
+      <nav class="flex-1 px-3 space-y-1 text-[15px] font-medium mt-2">
+        <a href="/dashboard" class="nav-item flex items-center space-x-4 px-4 py-3 rounded-xl hover:bg-gray-100 text-gray-600 transition-colors">
+          <i class="fas fa-home w-6 text-center text-gray-500"></i><span>Home</span>
         </a>
-        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
-          <i class="fas fa-search w-6 text-center"></i><span>Explore</span>
+        <a href="#" id="browseServices" class="nav-item flex items-center space-x-4 px-4 py-3 rounded-xl hover:bg-gray-100 text-gray-600 transition-colors">
+          <i class="fas fa-search w-6 text-center text-gray-500"></i><span>Browse Services</span>
         </a>
-        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
-          <i class="fas fa-bell w-6 text-center"></i><span>Notifications</span>
+        <a href="#" class="nav-item flex items-center space-x-4 px-4 py-3 rounded-xl hover:bg-gray-100 text-gray-600 transition-colors coming-soon">
+          <i class="fas fa-bell w-6 text-center text-gray-500"></i><span>Notifications</span>
         </a>
-        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
-          <i class="fas fa-envelope w-6 text-center"></i><span>Messages</span>
+        <a href="#" class="nav-item flex items-center space-x-4 px-4 py-3 rounded-xl hover:bg-gray-100 text-gray-600 transition-colors coming-soon">
+          <i class="fas fa-envelope w-6 text-center text-gray-500"></i><span>Messages</span>
         </a>
-        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
-          <i class="fas fa-bookmark w-6 text-center"></i><span>Bookmarks</span>
-        </a>
-        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
-          <i class="fas fa-list w-6 text-center"></i><span>Lists</span>
-        </a>
-        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
-          <i class="fas fa-user w-6 text-center"></i><span>Profile</span>
-        </a>
-        <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-full hover:bg-gray-100 text-gray-800">
-          <i class="fas fa-ellipsis-h w-6 text-center"></i><span>More</span>
+        <a href="#" class="nav-item flex items-center space-x-4 px-4 py-3 rounded-xl hover:bg-gray-100 text-gray-600 transition-colors">
+          <i class="fas fa-shopping-cart w-6 text-center text-gray-500"></i><span>My Orders</span>
         </a>
 
         <!-- Action Button -->
-        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-full transition">
-          New Post
+        <button class="mt-6 w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-4 rounded-xl transition-all">
+          <i class="fas fa-plus mr-2"></i>Offer a Service
         </button>
       </nav>
 
       <!-- Profile Section -->
-      <div class="p-4 mt-auto mb-3">
-        <div class="flex items-center justify-between p-2 rounded-full hover:bg-gray-100 cursor-pointer">
+      <div class="p-4 mt-auto mb-3 relative">
+        <div id="profileBtn"
+             class="flex items-center justify-between p-2 rounded-xl hover:bg-gray-100 cursor-pointer transition-colors">
           <div class="flex items-center space-x-3">
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                alt="Profile" class="w-10 h-10 rounded-xl object-cover" />
+              <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+            </div>
             <div>
-              <p class="text-sm font-semibold truncate">John Student</p>
-              <p class="text-xs text-gray-500 truncate">@johnstudent</p>
+              <p class="text-sm font-semibold truncate">{{ user.username }}</p>
+              <p class="text-xs text-gray-500 truncate">User</p>
             </div>
           </div>
-          <i class="fas fa-ellipsis-h text-gray-500"></i>
+          <i class="fas fa-chevron-down text-gray-500"></i>
+        </div>
+
+        <!-- Dropdown -->
+        <div id="profileMenu"
+             class="hidden absolute right-4 bottom-16 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
+          <a href="/private_profile"
+             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2">
+            <i class="fas fa-user w-5 text-center"></i><span>My Profile</span>
+          </a>
+          <div class="border-t border-gray-100"></div>
+          <a href="/logout"
+             class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2">
+            <i class="fas fa-sign-out-alt w-5 text-center"></i><span>Logout</span>
+          </a>
         </div>
       </div>
     </aside>
 
     <!-- Main Content -->
     <div class="flex-1 flex flex-col overflow-hidden">
-      <!-- Header with search -->
-      <header class="bg-white border-b border-gray-200 flex items-center justify-between px-6 py-4">
+      <!-- Header -->
+      <header class="bg-white border-b border-gray-200 flex items-center justify-between px-6 py-4 sticky top-0 z-10">
         <h1 class="text-xl font-bold text-gray-900">{% block h1 %}{% endblock %}</h1>
         <!-- Search Bar -->
-        <div class="relative w-64">
-          <input type="text" placeholder="Search AcadKo"
-            class="w-full bg-gray-100 rounded-full py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
-          <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+        <div class="relative w-72">
+          <input type="text" id="searchBar" placeholder="Find academic services..."
+            class="w-full bg-gray-100 rounded-xl py-2.5 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all" />
+          <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
         </div>
       </header>
 
       <!-- Page Content -->
-      <main class="flex-1 overflow-y-auto p-6">
-        {% block content %}{% endblock %}
+      <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+          {% block content %}{% endblock %}
+        </div>
       </main>
     </div>
 
   </div>
+
+  <script>
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
+    const browseServices = document.getElementById("browseServices");
+    const searchBar = document.getElementById("searchBar");
+
+    // Profile dropdown toggle
+    profileBtn.addEventListener("click", () => {
+      profileMenu.classList.toggle("hidden");
+    });
+
+    // Close profile dropdown when clicking outside
+    document.addEventListener("click", function (e) {
+      if (!profileBtn.contains(e.target) && !profileMenu.contains(e.target)) {
+        profileMenu.classList.add("hidden");
+      }
+    });
+
+    // Focus on search bar when Browse Services is clicked
+    browseServices.addEventListener("click", function(e) {
+      e.preventDefault(); // Prevent default link behavior
+      searchBar.focus(); // Focus on the search bar
+      
+      // Optional: Add a slight animation to highlight the search bar
+      searchBar.classList.add("ring-2", "ring-primary-500");
+      setTimeout(() => {
+        searchBar.classList.remove("ring-2", "ring-primary-500");
+      }, 1000);
+    });
+  </script>
 </body>
 </html>

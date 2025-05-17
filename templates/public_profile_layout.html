@@ -1,0 +1,48 @@
+{% extends "private_layout.html" %}
+
+{% block h1 %}Welcome Back to AcadKo!{% endblock %}
+
+{% block content %}
+<div class="font-[Inter] bg-gray-50 p-4 my-8 rounded-2xl shadow-xl max-w-5xl mx-auto">
+
+  <!-- Header Section -->
+  <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 md:p-10 animate-[gradientAnimation_3s_ease_infinite] bg-[length:200%_200%]">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/4 flex justify-center mb-6 md:mb-0">
+        {% block profile_avatar %}
+        <div class="h-40 w-40 rounded-full border-4 border-white shadow-lg overflow-hidden bg-gray-200 flex items-center justify-center">
+          <!-- Avatar placeholder -->
+        </div>
+        {% endblock %}
+      </div>
+      <div class="md:w-3/4 text-center md:text-left md:pl-8">
+        <h1 class="text-3xl md:text-4xl font-bold mb-2">{% block profile_name %}Name{% endblock %}</h1>
+        <h2 class="text-xl md:text-2xl font-medium mb-4">{% block profile_title %}Title{% endblock %}</h2>
+        {% block profile_links %}{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Grid -->
+  <div class="p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Left -->
+    <div class="col-span-2 space-y-10">
+      {% block profile_summary %}{% endblock %}
+      {% block profile_experience %}{% endblock %}
+      {% block profile_certifications %}{% endblock %}
+    </div>
+    <!-- Right -->
+    <div>
+      {% block profile_skills %}{% endblock %}
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+</style>
+{% endblock %}
